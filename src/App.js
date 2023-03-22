@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import './App.css';
 import Home from './Components/HomePage/Homepage.js'
+import Menu from './Components/Menu/Menu.js'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Router>
         <Routes>
           <Route exact path='/'  element={<Home />} />
+          <Route path='/menu'  element={<Menu />} />
         </Routes>
       </Router>
       

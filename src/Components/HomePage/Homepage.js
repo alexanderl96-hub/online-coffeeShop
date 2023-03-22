@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaStar, FaHeart, FaDollarSign } from 'react-icons/fa';
+import { Link } from 'react-router-dom'
 
 const Homepage = () => {
     const memberImg2 = 'https://cdn3.iconfinder.com/data/icons/modern-future-technology/128/mobile-phone-x-512.png'
@@ -28,7 +29,7 @@ const Homepage = () => {
                     <div style={{ display: 'flex', justifyContent: 'flex-start',alignItems: 'center', height: '30px',
                      gap: '10px',  color:'black'}}>
                         <div style={{display:'flex', justifyContent:' center',alignItems: 'center',marginLeft: '10px', 
-                        fontSize: '16px', width: '24px', height: '24px', borderRadius: '50%', background: '#ffb703'}}> <FaHeart style={{fill: 'white'}} /></div>
+                        fontSize: '16px', width: '24px', height: '24px', borderRadius: '50%', background: '#ffb703', }}> <FaHeart style={{fill: 'white'}} /></div>
                         <div style={{fontSize: '13px', fontWeight: 500}} > ORDER & FAVORITES </div> 
                     </div>
                     <hr/>
@@ -44,7 +45,8 @@ const Homepage = () => {
             <div style={{ display: 'flex', justifyContent: 'center',alignItems: 'center',
                           height: '70px', backgroundColor: '#29c5f6', marginTop: '-90px',
                           width: '288.5px',marginLeft: '20.5px', borderBottomLeftRadius: '30px',
-                           borderBottomRightRadius: '30px', cursor: 'pointer', fontSize: '13px',fontWeight: 600 }}>ORDER NOW</div>
+                           borderBottomRightRadius: '30px', cursor: 'pointer', fontSize: '13px',fontWeight: 600 }}>
+                            <Link to='/menu' style={{textDecoration: "none", color: '#fff'}} >ORDER NOW</Link></div>
         </div>
        
     </div>
