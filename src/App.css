@@ -9,11 +9,11 @@
     overflow-y: scroll;
     display: flex; 
     justify-content: center; 
-    align-items: center; 
+    /* align-items: center;  */
     flex-direction: column; 
-    gap: 20px; 
-    padding-top: 250px;
-    /* height: 205px; */
+    gap: 10px; 
+    padding-top: 400px;
+    max-height: 405px;
     border-bottom-left-radius: 25px;  
     border-bottom-right-radius: 25px;
     cursor: pointer;
