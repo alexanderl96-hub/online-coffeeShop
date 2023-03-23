@@ -7,6 +7,7 @@ import {
 import './App.css';
 import Home from './Components/HomePage/Homepage.js'
 import Menu from './Components/Menu/Menu.js'
+import MenuOptions from './Components/MenuOptions/MenuOptions.js'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route exact path='/'  element={<Home />} />
           <Route path='/menu'  element={<Menu />} />
+          <Route path='/menu/menuOptions'  element={<MenuOptions />} />
         </Routes>
       </Router>
       

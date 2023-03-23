@@ -42,11 +42,12 @@ const Homepage = () => {
                     <hr/>
                 </div>
             </div>
+            <Link to='/menu' style={{textDecoration: "none", color: '#fff'}} >
             <div style={{ display: 'flex', justifyContent: 'center',alignItems: 'center',
                           height: '70px', backgroundColor: '#29c5f6', marginTop: '-90px',
                           width: '288.5px',marginLeft: '20.5px', borderBottomLeftRadius: '30px',
                            borderBottomRightRadius: '30px', cursor: 'pointer', fontSize: '13px',fontWeight: 600 }}>
-                            <Link to='/menu' style={{textDecoration: "none", color: '#fff'}} >ORDER NOW</Link></div>
+                           ORDER NOW</div></Link>
         </div>
        
     </div>
