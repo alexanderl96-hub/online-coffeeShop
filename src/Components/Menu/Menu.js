@@ -32,36 +32,37 @@ const Menu = () => {
                 style={{backgroundImage: `url(${memberImg2})`,  backgroundPosition: 'center',
                 backgroundSize: '200% 100%',
                 backgroundRepeat: 'no-repeat', height: '100%',
-            }}>
-           </div>
+                }}>
+              </div>
            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column',
                  height: '125px', fontSize: '40px', position: 'relative',
                   float: 'left', left: '35px', top: '-390px'}}>
                  
                  <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center',}}>
-                  <Link to={`/`} ><AiOutlineLeftCircle  style={{fill: '#ffb703', fontSize: '30px', marginLeft: '-80px',
-                    cursor: 'pointer'}} /> </Link> 
-                   <div  style={{ 
-                    }} >Menu</div></div>
-                 <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', 
-                                flexDirection: 'column',  height: '550px', marginTop: '20px' }}>
-                    <div style={{ }} className='overflow-Container'>
-                      {coffeeData.map((a)=>{
-                        return(
-                          <div >
-                            <Link to={`/menu/menuOptions?${a[0].replaceAll(' ','')}`} style={{textDecoration: 'none', color:'black'}} 
-                                 state={{ coffeeType: a[0].replaceAll(' ','')}} >
-                                <div>{a[0]}</div>
-                                <img src={a[1]} alt=''  />
-                             </Link>
-                          </div>
-                        )
-                      })}
-                       
-                    </div>
-                </div>
+                        <Link to={`/`} ><AiOutlineLeftCircle  style={{fill: '#ffb703', fontSize: '30px', marginLeft: '-80px',
+                          cursor: 'pointer'}} /> </Link> 
+                        <div  style={{ 
+                          }} >Menu</div>
+                  </div>
+                  <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', 
+                                      flexDirection: 'column',  height: '550px', marginTop: '20px' }}>
+                          <div style={{ }} className='overflow-Container'>
+                            {coffeeData.map((a)=>{
+                              return(
+                                <div >
+                                  <Link to={`/menu/menuOptions?${a[0].replaceAll(' ','')}`} style={{textDecoration: 'none', color:'black'}} 
+                                      state={{ coffeeType: a[0]}} >
+                                      <div>{a[0]}</div>
+                                      <img src={a[1]} alt=''  />
+                                  </Link>
+                                </div>
+                              )
+                            })}
+                            
+                        </div>
+                   </div>
                  
-                 </div>
+             </div>
                
         </div>
     </div>
