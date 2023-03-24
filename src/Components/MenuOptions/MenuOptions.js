@@ -5,6 +5,8 @@ import {AiOutlineLeft, AiOutlineRight, AiOutlineRightCircle, AiOutlineLeftCircle
 
  const MenuOptions = () => {
   const [open, setOpen] = useState('false')
+  const [targetValue, setTargetValue] = useState('')
+  const [readMore, setReadMore] = useState(false)
     const memberImg2 = 'https://cdn3.iconfinder.com/data/icons/modern-future-technology/128/mobile-phone-x-512.png'
     const location = useLocation()
     const { coffeeType} = location?.state
@@ -12,10 +14,10 @@ import {AiOutlineLeft, AiOutlineRight, AiOutlineRightCircle, AiOutlineLeftCircle
     const blackCoffee = [[`Black coffee is simply a mixture of water and coffee without any cream. It 
                          should be served without any additional flavors like honey, cream, or milk. The 
                          addition of these ingredients may change the coffee's aroma and color, turning it 
-                         lighter-brown or white. In the major parts of the world coffee can be seen as 
+                         lighter-brown or white.In the major parts of the world coffee can be seen as 
                          a drink which makes us active, which can also help aid us in performing daily 
                          activities. It is the kick of caffeine, which usually sharpens our mind and make 
-                         them active. `], 
+                         them active.  `], 
                          [`Expresso Coffee`, `originated from Italy, and it is more of a concentrated coffee shot, prepared 
                          by pressuring hot water through grounded coffee beans using an espresso machine. It does not 
                          require a specific type of coffee bean to make an Espresso. The coffee bean can be roasted according 
@@ -78,6 +80,20 @@ import {AiOutlineLeft, AiOutlineRight, AiOutlineRightCircle, AiOutlineLeftCircle
     //         }
     // },[coffee])
 
+
+function handelInputCard (e) {
+  console.log(Number(e.target.id), 'e.target,id') 
+  if(open === 'false' ){
+    setOpen('true')
+  }else if(open === 'true' && targetValue === Number(e.target.id)){
+    setOpen('false')
+  }else if(open === 'true' && targetValue !== Number(e.target.id)){
+    setOpen('true')
+  }
+  setReadMore(false)
+}
+
+
     const aboutLength = (about) => {
       let pro = [];
       let i = 0
@@ -86,9 +102,9 @@ import {AiOutlineLeft, AiOutlineRight, AiOutlineRightCircle, AiOutlineLeftCircle
          pro.push(str[i])
          i++
       }
-      return pro.length <= 80 ?  pro.join(' ') : pro.slice(0,80).join(' ').concat(' ...')
+      return pro.length <= 70 ?  pro.join(' ') : pro.slice(0,70).join(' ').concat(' ...')
     };
-    console.log(coffeeType.split(' ')[0])
+    console.log( targetValue , open )
 
   return (
     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'black', }}>
@@ -103,7 +119,7 @@ import {AiOutlineLeft, AiOutlineRight, AiOutlineRightCircle, AiOutlineLeftCircle
              
              <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column',
                             height: '125px', fontSize: '30px', position: 'relative',
-                              float: 'left', left: '35px', top: '-360px'}}>
+                              float: 'left', left: '35px', top: '-390px'}}>
 
                         <div style={{display: 'flex',flexDirection:'column' ,justifyContent: 'center', alignItems: 'center',}}>
                            <div  style={{display: 'flex',justifyContent: 'center', alignItems: 'center',marginLeft: '10px',
@@ -114,15 +130,20 @@ import {AiOutlineLeft, AiOutlineRight, AiOutlineRightCircle, AiOutlineLeftCircle
                          </div>
                         
                          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', 
-                                      flexDirection: 'column',  height: '550px',}}>
-                                    <div style={{ textAlign:'justify',  fontSize: '13px', width: '260px'}}>{blackCoffee[0][0]}</div>
-                                    <div style={{width: '260px',  textAlign:'justify', marginTop:'5px',  }} className='overflow-Container-Options'>
+                                      flexDirection: 'column',  height: '500px',}}>
+                                    <div onClick={(()=> readMore === false ? setReadMore(true) : setReadMore(false))} 
+                                         style={{ textAlign:'justify',  fontSize: '13px', width: '260px', marginBottom: '5px'}}>{readMore === false ? `${blackCoffee[0][0].slice(0,252)} ... ` : blackCoffee[0][0]}</div>
+
+                                    <div style={{width: '260px',  textAlign:'justify',  }} className='overflow-Container-Options'>
                                              {blackCoffee.slice(1).map((a, ind)=>{return(
-                                                   <div onClick={(()=> open === 'false' && ind +1 ? setOpen('true') : setOpen('false'))}
+                                                   <div id={ind} onClick={handelInputCard}
+                                                         
                                                    style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'row', 
                                                     paddingTop: '10px'}}>
-                                                       <div style={{fontSize: '12px', backgroundColor: '#eae2b7', padding: '7px', minHeight: '70px'}}>
-                                                        <b>{a[0]}</b> {open === 'true'  ? a[1] : aboutLength(a[1])  }</div>
+                                                       <div id={ind} onClick={((e)=> setTargetValue(ind))} 
+                                                           style={{fontSize: '12px', backgroundColor: '#eae2b7', padding: '7px', minHeight: '70px', 
+                                                           borderRadius: '2px', color: '#333333'}}>
+                                                        <b>{a[0]}</b> { open === 'true' && targetValue === ind  ? a[1] : aboutLength(a[1])  }</div>
                                                    </div>
                                              )})}
 
