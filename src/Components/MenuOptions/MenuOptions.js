@@ -131,8 +131,9 @@ function handelInputCard (e) {
                         
                          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', 
                                       flexDirection: 'column',  height: '500px',}}>
-                                    <div onClick={(()=> readMore === false ? setReadMore(true) : setReadMore(false))} 
-                                         style={{ textAlign:'justify',  fontSize: '13px', width: '260px', marginBottom: '5px'}}>{readMore === false ? `${blackCoffee[0][0].slice(0,252)} ... ` : blackCoffee[0][0]}</div>
+                                    <div className={readMore === false ? 'checktransition' : 'checktransition2' }
+                                    onClick={(()=> readMore === false ? setReadMore(true) : setReadMore(false))} 
+                                         style={{}}>{readMore === false ? `${blackCoffee[0][0].slice(0,252)} ... ` : blackCoffee[0][0]}</div>
 
                                     <div style={{width: '260px',  textAlign:'justify',  }} className='overflow-Container-Options'>
                                              {blackCoffee.slice(1).map((a, ind)=>{return(

@@ -39,7 +39,23 @@
   opacity: 1;
 }
 
-
+.checktransition{
+    text-align: justify;  
+    font-size: 13px; 
+    width: 260px; 
+    margin-bottom: 5px;
+    height: 25%;
+    transition: 500ms ease-out;
+}
+.checktransition2{
+    text-align: justify;  
+    font-size: 13px; 
+    width: 260px; 
+    margin-bottom: 5px;
+    height: 60%; 
+    transition: 1000ms linear;
+  
+}
 
 
 
