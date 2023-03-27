@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../../App.css'
 import { Link } from 'react-router-dom'
-import {AiOutlineLeft, AiOutlineRight, AiOutlineRightCircle, AiOutlineLeftCircle} from 'react-icons/ai'
+import { AiOutlineLeftCircle} from 'react-icons/ai'
 
 // const Text = props =>{
 //   const {name} = props;
@@ -9,7 +9,7 @@ import {AiOutlineLeft, AiOutlineRight, AiOutlineRightCircle, AiOutlineLeftCircle
 // }
 
 const Menu = () => {
-    const [options, setOptions] = useState('')
+    // const [options, setOptions] = useState('')
     const [coffeeType, setCoffeeType] = useState('')
     const memberImg2 = 'https://cdn3.iconfinder.com/data/icons/modern-future-technology/128/mobile-phone-x-512.png'
     const coffeeData = [['Black Coffee','https://images.unsplash.com/photo-1521302080334-4bebac2763a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YmxhY2slMjBjb2ZmZWV8ZW58MHx8MHx8&w=1000&q=80'], 
@@ -47,11 +47,11 @@ const Menu = () => {
                   <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', 
                                       flexDirection: 'column',  height: '550px', marginTop: '20px' }}>
                           <div style={{ }} className='overflow-Container'>
-                            {coffeeData.map((a)=>{
+                            {coffeeData.map((a,ind)=>{
                               return(
-                                <div >
-                                  <Link to={`/menu/menuOptions?${a[0].replaceAll(' ','')}`} style={{textDecoration: 'none', color:'black'}} 
-                                      state={{ coffeeType: a[0]}} >
+                                <div key={ind}>
+                                  <Link to={`/menu/menuOptions?${'typeOfCoffee='+a[0].split(' ').join('')}`} style={{textDecoration: 'none', color:'black'}} 
+                                      state={{ coffeeType: a[0], coffeeImage: a[1]}} >
                                       <div>{a[0]}</div>
                                       <img src={a[1]} alt=''  />
                                   </Link>

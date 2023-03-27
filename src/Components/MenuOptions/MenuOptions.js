@@ -1,15 +1,21 @@
 import React, {useEffect, useState} from 'react'
 import {Link, useLocation } from 'react-router-dom'
-import {AiOutlineLeft, AiOutlineRight, AiOutlineRightCircle, AiOutlineLeftCircle} from 'react-icons/ai'
+import {AiOutlineLeftCircle} from 'react-icons/ai'
 // import {coffeeType} from '../Menu/Menu'
 
  const MenuOptions = () => {
   const [open, setOpen] = useState('false')
   const [targetValue, setTargetValue] = useState('')
   const [readMore, setReadMore] = useState(false)
+  // const [ goNextPage, setGoNextPage] = useState('false')
     const memberImg2 = 'https://cdn3.iconfinder.com/data/icons/modern-future-technology/128/mobile-phone-x-512.png'
     const location = useLocation()
+    // let valuePath = 'http://localhost:3000/menu/menuOptions'
+    // let windowPath = window.location.href
     const { coffeeType} = location?.state
+    const {coffeeImage} = location?.state
+    let nextValue = coffeeType.split(' ').join('') || ''
+    console.log(nextValue)
 
     const blackCoffee = [[`Black coffee is simply a mixture of water and coffee without any cream. It 
                          should be served without any additional flavors like honey, cream, or milk. The 
@@ -54,13 +60,13 @@ import {AiOutlineLeft, AiOutlineRight, AiOutlineRightCircle, AiOutlineLeftCircle
                          [`Irish Coffee`, `is a popular Irish coffee recipe known all around the world. Its addition of Irish 
                          whiskey, cream, shot of Espresso and sugar makes it an instant favorite among people. It came 
                          into existence when experimenting the drink during 1950’s.`]]
-    const latteCoffee = [``]
-    const cappuccinoCoffee = [``]
-    const americanoCoffee = [``]
-    const espressoblackCoffee = [``]
-    const doppioCoffee = [``]
-    const cortadoCoffee = [``]
-    const galaoCoffee = [``]
+    // const latteCoffee = [``]
+    // const cappuccinoCoffee = [``]
+    // const americanoCoffee = [``]
+    // const espressoblackCoffee = [``]
+    // const doppioCoffee = [``]
+    // const cortadoCoffee = [``]
+    // const galaoCoffee = [``]
     // const lungoCoffee = []
     // const macchiatoCoffee = []
     // const mochaCoffee = []
@@ -73,24 +79,34 @@ import {AiOutlineLeft, AiOutlineRight, AiOutlineRightCircle, AiOutlineLeftCircle
 //   console.log( window.history.replaceState(null, 'React App', `/menuOptions?coffeType=${coffeeType}`))
     // console.log(query)
     // useEffect(()=>{
-    //     if (window.history.replaceState) {
+    //     if (valuePath === windowPath) {
     //             //prevents browser from storing history with each change:
     //             // window.history.replaceState(null, 'React App', `/menu/menuOptions?coffeeType=${coffee.join('')}`);
-    //             window.history.pushState({}, null,  `/menu/menuOptions?coffeeType=${coffee.join('')}`);
+    //             // window.history.pushState({}, null,  `/menu/menuOptions/coffeeType=${nextValue}`);
+    //             window.history.replaceState(null, "React App", `/menu/menuOptions${'?coffeeType=' + nextValue}`)
+    //         }else{
+    //           window.history.replaceState(null, "React App", windowPath)
     //         }
-    // },[coffee])
+    // },[nextValue, valuePath, windowPath])
+    // window.history.replaceState(null, "React App", `/menu/menuOptions${'?coffeeType=' + nextValue}`)
+    console.log(nextValue, 'checking next Value')
 
 
 function handelInputCard (e) {
   console.log(Number(e.target.id), 'e.target,id') 
   if(open === 'false' ){
     setOpen('true')
+    //  setGoNextPage('true')
   }else if(open === 'true' && targetValue === Number(e.target.id)){
     setOpen('false')
+    // setGoNextPage('true')
+
   }else if(open === 'true' && targetValue !== Number(e.target.id)){
     setOpen('true')
+    // setGoNextPage('false')
   }
   setReadMore(false)
+  //  setGoNextPage('true')
 }
 
 
@@ -102,7 +118,7 @@ function handelInputCard (e) {
          pro.push(str[i])
          i++
       }
-      return pro.length <= 70 ?  pro.join(' ') : pro.slice(0,70).join(' ').concat(' ...')
+      return pro.length <= 40 ?  pro.join(' ') : pro.slice(0,40).join(' ').concat(' ...')
     };
     console.log( targetValue , open )
 
@@ -123,7 +139,7 @@ function handelInputCard (e) {
 
                         <div style={{display: 'flex',flexDirection:'column' ,justifyContent: 'center', alignItems: 'center',}}>
                            <div  style={{display: 'flex',justifyContent: 'center', alignItems: 'center',marginLeft: '10px',
-                                         fontSize: '30px',marginBottom: '10px',}} >{coffeeType.split(' ')[0]}</div>
+                                         fontSize: '30px',marginBottom: '10px',}} >{nextValue.split(' ')[0]}</div>
                            <Link to={`/menu`} ><AiOutlineLeftCircle  
                                                style={{fill: '#ffb703', fontSize: '30px', marginLeft: '-130px',
                                                 cursor: 'pointer'}} /> </Link> 
@@ -137,14 +153,25 @@ function handelInputCard (e) {
 
                                     <div style={{width: '260px',  textAlign:'justify',  }} className='overflow-Container-Options'>
                                              {blackCoffee.slice(1).map((a, ind)=>{return(
-                                                   <div id={ind} onClick={handelInputCard}
-                                                         
-                                                   style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'row', 
-                                                    paddingTop: '10px'}}>
-                                                       <div id={ind} onClick={((e)=> setTargetValue(ind))} 
-                                                           style={{fontSize: '12px', backgroundColor: '#eae2b7', padding: '7px', minHeight: '70px', 
-                                                           borderRadius: '2px', color: '#333333'}}>
-                                                        <b>{a[0]}</b> { open === 'true' && targetValue === ind  ? a[1] : aboutLength(a[1])  }</div>
+                                                   <div id={ind} key={ind} onClick={handelInputCard}
+                                                         className= 'overflow-Container-Options_Cards'>
+                                                     <div className={ open === 'true' && targetValue === ind ? 'checkCardOpen' :'checkCard'}
+                                                            id={ind} onClick={((e)=> setTargetValue(ind))} 
+                                                           >
+                                                        <b>{a[0]}</b> { open === 'true' && targetValue === ind  ? a[1] : `${a[1].slice(0,85)} ...` } 
+                                                        { open === 'true' && targetValue === ind && <Link to={`/menu/menuOptions/Select?${nextValue + '=' + a[0].split(' ').join('')}`}
+                                                    style={{textDecoration :'none', color: 'black'}}
+                                                           state={{coffeeImage : coffeeImage, coffeeType: coffeeType}}
+                                                    >   <div style={{width: '45px', height: '15px', fontSize: '11px', backgroundColor: 'red',
+                                                              display: 'flex', justifyContent: 'center', alingItems: 'center', padding: '1px',
+                                                              borderRadius: '50px', marginLeft: '70%', marginTop: '3px'}}
+                                                            id={ind} onClick={((e)=> setTargetValue(ind))} 
+                                                           > goNext
+                                                       
+                                                        </div> </Link> }
+                                                        </div> 
+                                                     
+                                                        
                                                    </div>
                                              )})}
 

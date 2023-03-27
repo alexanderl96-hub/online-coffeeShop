@@ -8,6 +8,7 @@ import './App.css';
 import Home from './Components/HomePage/Homepage.js'
 import Menu from './Components/Menu/Menu.js'
 import MenuOptions from './Components/MenuOptions/MenuOptions.js'
+import SelectionOrder from './Components/SelectionOrder/SelectionOrder'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route exact path='/'  element={<Home />} />
           <Route path='/menu'  element={<Menu />} />
           <Route path='/menu/menuOptions'  element={<MenuOptions />} />
+          <Route path='/menu/menuOptions/Select'  element={<SelectionOrder />} />
         </Routes>
       </Router>
       
