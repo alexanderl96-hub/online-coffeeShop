@@ -9,6 +9,8 @@ import Home from './Components/HomePage/Homepage.js'
 import Menu from './Components/Menu/Menu.js'
 import MenuOptions from './Components/MenuOptions/MenuOptions.js'
 import SelectionOrder from './Components/SelectionOrder/SelectionOrder'
+import ReviewOrder from './Components/ReviewOrder/ReviewOrder'
+import PrepFinalOrder from './Components/PrepFinalOrder/PrepFinalOrder';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path='/menu'  element={<Menu />} />
           <Route path='/menu/menuOptions'  element={<MenuOptions />} />
           <Route path='/menu/menuOptions/Select'  element={<SelectionOrder />} />
+          <Route path='/menu/ReviewOrder'  element={<ReviewOrder />} />
+          <Route path='/menu/PrepOrder'  element={<PrepFinalOrder />} />
         </Routes>
       </Router>
       

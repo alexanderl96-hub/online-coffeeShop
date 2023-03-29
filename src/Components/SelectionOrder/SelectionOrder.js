@@ -1,13 +1,17 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { AiOutlineCloseCircle,AiOutlineDown, AiOutlineUp} from 'react-icons/ai'
  import {Link, useLocation } from 'react-router-dom'
 
 const SelectionOrder = () => {
+  const [ceckOrder, setCheckOrder] = useState('false')
     const memberImg2 = 'https://cdn3.iconfinder.com/data/icons/modern-future-technology/128/mobile-phone-x-512.png'
      const location = useLocation()
      const {coffeeImage} = location?.state
      const {coffeeType} = location?.state
-    console.log('SelectionOrder Hola this is your selection order')
+     const {coffeeSelection} = location?.state
+     const {coffeeDescription} = location?.state
+
+    console.log(ceckOrder,'SelectionOrder Hola this is your selection order')
   return (
     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'black', }}>
             <div  style={{width: '330px', height: '680px',  backgroundSize:'100% 50%', 
@@ -98,14 +102,23 @@ const SelectionOrder = () => {
                                     <div style={{width: '80%', height: '1.1px', backgroundColor: '#dee1dd'}}>
                                 </div>
                           </div>
-                          <div style={{height: '80px', backgroundColor: '#29c5f6', 
-                           borderBottomLeftRadius: '60px', borderBottomRightRadius: '60px',marginTop: '5px',
-                            display: 'flex', justifyContent: 'center', alignItems: 'center', 
-                            fontSize: '12px', fontWeight: 'bold', color: '#FFFF', }}>
-                                {'add to order'.toUpperCase() + '$(' + 4.87 + ')'}
-                          </div>
+                       
+                         
                      </div>
+                     
             </div>  
+            <div style={{ float: 'left', zIndex: 1, height: '70px', backgroundColor: '#29c5f6', 
+                           borderBottomLeftRadius: '30px', borderBottomRightRadius: '30px',marginTop: '45.5%',
+                            display: 'flex', justifyContent: 'center', alignItems: 'center', 
+                            fontSize: '12px', fontWeight: 'bold', color: '#FFFF', 
+                            marginLeft: '-309px', width: '289px', }}>
+                                 <Link to={`/menu/ReviewOrder`} 
+                                      state={{coffeeType: coffeeType, coffeeImage: coffeeImage, coffeeSelection: coffeeSelection, 
+                                        coffeeDescription: coffeeDescription}}
+                                       onClick={(()=> ceckOrder === 'false' ? setCheckOrder('true') : setCheckOrder('false'))}
+                                       style={{cursor: 'pointer', textDecoration: 'none', color:'white'}}> 
+                                  {'add to order'.toUpperCase() + ' ($' + 4.87 + ')'}</Link>
+                          </div>
    </div> 
   )
 }

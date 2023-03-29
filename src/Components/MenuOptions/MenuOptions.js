@@ -1,9 +1,25 @@
 import React, {useEffect, useState} from 'react'
-import {Link, useLocation } from 'react-router-dom'
+import {Link, useLocation , useSearchParams} from 'react-router-dom'
 import {AiOutlineLeftCircle} from 'react-icons/ai'
 // import {coffeeType} from '../Menu/Menu'
-
+const coffeeObj = {
+                  'BlackCoffee': {
+                                 'imag': 'https://images.unsplash.com/photo-1521302080334-4bebac2763a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YmxhY2slMjBjb2ZmZWV8ZW58MHx8MHx8&w=1000&q=80'
+                                },
+                  'LatteCoffee': {
+                                'imag': 'https://thumbs.dreamstime.com/b/black-coffee-cup-art-latte-froth-tulip-shaped-isolated-white-background-clipping-path-225258642.jpg'
+                                },
+                  'CappuccinoCoffee': {
+                                  'imag': 'https://www.shutterstock.com/image-photo/cup-art-latte-on-cappuccino-260nw-1323112487.jpg'
+                                 },
+                  'AmericanoCoffee': {
+                                 'imag': 'https://www.shutterstock.com/image-photo/coffee-drink-after-roasting-beans-260nw-1948127311.jpg'
+                                 }
+                  }
  const MenuOptions = () => {
+  const [search, setSearch] = useSearchParams();
+
+ 
   const [open, setOpen] = useState('false')
   const [targetValue, setTargetValue] = useState('')
   const [readMore, setReadMore] = useState(false)
@@ -12,10 +28,11 @@ import {AiOutlineLeftCircle} from 'react-icons/ai'
     const location = useLocation()
     // let valuePath = 'http://localhost:3000/menu/menuOptions'
     // let windowPath = window.location.href
-    const { coffeeType} = location?.state
-    const {coffeeImage} = location?.state
+    const coffeeType =  search.get('typeOfCoffee')
+    const coffeeImage =  coffeeObj[coffeeType].imag 
     let nextValue = coffeeType.split(' ').join('') || ''
-    console.log(nextValue)
+    // console.log(nextValue)
+    console.log(coffeeType,coffeeImage )
 
     const blackCoffee = [[`Black coffee is simply a mixture of water and coffee without any cream. It 
                          should be served without any additional flavors like honey, cream, or milk. The 
@@ -89,7 +106,7 @@ import {AiOutlineLeftCircle} from 'react-icons/ai'
     //         }
     // },[nextValue, valuePath, windowPath])
     // window.history.replaceState(null, "React App", `/menu/menuOptions${'?coffeeType=' + nextValue}`)
-    console.log(nextValue, 'checking next Value')
+    // console.log(nextValue, 'checking next Value')
 
 
 function handelInputCard (e) {
@@ -161,10 +178,11 @@ function handelInputCard (e) {
                                                         <b>{a[0]}</b> { open === 'true' && targetValue === ind  ? a[1] : `${a[1].slice(0,85)} ...` } 
                                                         { open === 'true' && targetValue === ind && <Link to={`/menu/menuOptions/Select?${nextValue + '=' + a[0].split(' ').join('')}`}
                                                     style={{textDecoration :'none', color: 'black'}}
-                                                           state={{coffeeImage : coffeeImage, coffeeType: coffeeType}}
+                                                           state={{coffeeImage : coffeeImage, coffeeType: coffeeType, coffeeSelection: `${a[0]}`,
+                                                            coffeeDescription: a[1].slice(0,80)}}
                                                     >   <div style={{width: '45px', height: '15px', fontSize: '11px', backgroundColor: 'red',
                                                               display: 'flex', justifyContent: 'center', alingItems: 'center', padding: '1px',
-                                                              borderRadius: '50px', marginLeft: '70%', marginTop: '3px'}}
+                                                              borderRadius: '50px', marginLeft: '70%', marginTop: '3px', color: 'white'}}
                                                             id={ind} onClick={((e)=> setTargetValue(ind))} 
                                                            > goNext
                                                        
