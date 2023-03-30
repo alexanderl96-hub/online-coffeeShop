@@ -1,21 +1,22 @@
 import React, {useEffect, useState} from 'react'
 import {Link, useLocation , useSearchParams} from 'react-router-dom'
 import {AiOutlineLeftCircle} from 'react-icons/ai'
+import { hotCoffeeData } from '../CoffeeData.js' 
 // import {coffeeType} from '../Menu/Menu'
-const coffeeObj = {
-                  'BlackCoffee': {
-                                 'imag': 'https://images.unsplash.com/photo-1521302080334-4bebac2763a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YmxhY2slMjBjb2ZmZWV8ZW58MHx8MHx8&w=1000&q=80'
-                                },
-                  'LatteCoffee': {
-                                'imag': 'https://thumbs.dreamstime.com/b/black-coffee-cup-art-latte-froth-tulip-shaped-isolated-white-background-clipping-path-225258642.jpg'
-                                },
-                  'CappuccinoCoffee': {
-                                  'imag': 'https://www.shutterstock.com/image-photo/cup-art-latte-on-cappuccino-260nw-1323112487.jpg'
-                                 },
-                  'AmericanoCoffee': {
-                                 'imag': 'https://www.shutterstock.com/image-photo/coffee-drink-after-roasting-beans-260nw-1948127311.jpg'
-                                 }
-                  }
+// const coffeeObj = {
+//                   'BlackCoffee': {
+//                                  'imag': 'https://images.unsplash.com/photo-1521302080334-4bebac2763a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YmxhY2slMjBjb2ZmZWV8ZW58MHx8MHx8&w=1000&q=80'
+//                                 },
+//                   'LatteCoffee': {
+//                                 'imag': 'https://thumbs.dreamstime.com/b/black-coffee-cup-art-latte-froth-tulip-shaped-isolated-white-background-clipping-path-225258642.jpg'
+//                                 },
+//                   'CappuccinoCoffee': {
+//                                   'imag': 'https://www.shutterstock.com/image-photo/cup-art-latte-on-cappuccino-260nw-1323112487.jpg'
+//                                  },
+//                   'AmericanoCoffee': {
+//                                  'imag': 'https://www.shutterstock.com/image-photo/coffee-drink-after-roasting-beans-260nw-1948127311.jpg'
+//                                  }
+//                   }
  const MenuOptions = () => {
   const [search, setSearch] = useSearchParams();
 
@@ -29,10 +30,14 @@ const coffeeObj = {
     // let valuePath = 'http://localhost:3000/menu/menuOptions'
     // let windowPath = window.location.href
     const coffeeType =  search.get('typeOfCoffee')
-    const coffeeImage =  coffeeObj[coffeeType].imag 
+     const coffeeName =  hotCoffeeData[coffeeType]
+     const coffeeDescription = hotCoffeeData[coffeeType][coffeeType].description
+     const coffeeImage = hotCoffeeData[coffeeType][coffeeType].image
+     const coffeeIngrdients = hotCoffeeData[coffeeType][coffeeType].ingredients
     let nextValue = coffeeType.split(' ').join('') || ''
-    // console.log(nextValue)
-    console.log(coffeeType,coffeeImage )
+     console.log(Object.entries(coffeeName).map((a)=> [a[0], a[1]['description']]),'uiyguk')
+     console.log(coffeeType)
+   
 
     const blackCoffee = [[`Black coffee is simply a mixture of water and coffee without any cream. It 
                          should be served without any additional flavors like honey, cream, or milk. The 
@@ -169,17 +174,17 @@ function handelInputCard (e) {
                                          style={{}}>{readMore === false ? `${blackCoffee[0][0].slice(0,252)} ... ` : blackCoffee[0][0]}</div>
 
                                     <div style={{width: '260px',  textAlign:'justify',  }} className='overflow-Container-Options'>
-                                             {blackCoffee.slice(1).map((a, ind)=>{return(
+                                             {Object.entries(coffeeName).map((a, ind)=>{return(
                                                    <div id={ind} key={ind} onClick={handelInputCard}
                                                          className= 'overflow-Container-Options_Cards'>
                                                      <div className={ open === 'true' && targetValue === ind ? 'checkCardOpen' :'checkCard'}
                                                             id={ind} onClick={((e)=> setTargetValue(ind))} 
                                                            >
-                                                        <b>{a[0]}</b> { open === 'true' && targetValue === ind  ? a[1] : `${a[1].slice(0,85)} ...` } 
+                                                        <b>{a[0]}</b> { open === 'true' && targetValue === ind  ? a[1]['description'] : `${a[1]['description'].slice(0,85)} ...` } 
                                                         { open === 'true' && targetValue === ind && <Link to={`/menu/menuOptions/Select?${nextValue + '=' + a[0].split(' ').join('')}`}
                                                     style={{textDecoration :'none', color: 'black'}}
                                                            state={{coffeeImage : coffeeImage, coffeeType: coffeeType, coffeeSelection: `${a[0]}`,
-                                                            coffeeDescription: a[1].slice(0,80)}}
+                                                            coffeeDescription: a[1]['description'].slice(0,80)}}
                                                     >   <div style={{width: '45px', height: '15px', fontSize: '11px', backgroundColor: 'red',
                                                               display: 'flex', justifyContent: 'center', alingItems: 'center', padding: '1px',
                                                               borderRadius: '50px', marginLeft: '70%', marginTop: '3px', color: 'white'}}
@@ -188,7 +193,7 @@ function handelInputCard (e) {
                                                        
                                                         </div> </Link> }
                                                         </div> 
-                                                     
+                                                     {/* {a[0]}{a[1]['description']} */}
                                                         
                                                    </div>
                                              )})}
