@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import '../../App.css'
 import { Link } from 'react-router-dom'
 import { AiOutlineLeftCircle} from 'react-icons/ai'
+import { hotCoffeeData } from '../CoffeeData.js' 
 
 // const Text = props =>{
 //   const {name} = props;
@@ -22,7 +23,8 @@ const Menu = () => {
                         ['Red Eye Coffee',  'https://coffeeaffection.com/wp-content/uploads/2020/12/Black-Coffee.jpg' ],
                         ['Galao Coffee',  'https://www.nestleprofessional.in/sites/default/files/2021-08/Galao.jpg']]
 
-    console.log(coffeeType, 'choose coffee type')                     
+    console.log(coffeeType, 'choose coffee type')  
+    console.log(Object.keys(hotCoffeeData))                   
   return (
     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'black', }}>
         <div  style={{width: '330px', height: '680px',  backgroundSize:'100% 130%', 
@@ -47,12 +49,12 @@ const Menu = () => {
                   <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', 
                                       flexDirection: 'column',  height: '550px', marginTop: '20px' }}>
                           <div style={{ }} className='overflow-Container'>
-                            {coffeeData.map((a,ind)=>{
+                            {Object.keys(hotCoffeeData).map((a,ind)=>{
                               return(
                                 <div key={ind}>
-                                  <Link to={`/menu/menuOptions?${'typeOfCoffee='+a[0].split(' ').join('')}`} style={{textDecoration: 'none', color:'black'}} 
-                                      state={{ coffeeType: a[0], coffeeImage: a[1]}} >
-                                      <div>{a[0]}</div>
+                                  <Link to={`/menu/menuOptions?${'typeOfCoffee='+a}`} style={{textDecoration: 'none', color:'black'}} 
+                                      state={{ coffeeType: a, coffeeImage: a[1]}} >
+                                      <div>{a.slice(0,-6) + ' ' + a.slice(-6)}</div>
                                       <img src={a[1]} alt=''  />
                                   </Link>
                                 </div>
