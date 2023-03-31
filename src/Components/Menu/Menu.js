@@ -15,14 +15,19 @@ const Menu = () => {
     const memberImg2 = 'https://cdn3.iconfinder.com/data/icons/modern-future-technology/128/mobile-phone-x-512.png'
    
 useEffect(()=>{
-  setOptions(Object.entries(hotCoffeeData).map((elemObj) => [elemObj[0],
-              Object.entries(elemObj[1]).map((types)=> [types[0],
-               Object.entries(types[1]).map((every)=> every[1] )].flat(Infinity))]))
+  for(let i in hotCoffeeData){
+    setOptions(Object.entries(hotCoffeeData[i]).map((a)=> [a[0],
+                                             Object.entries(a[1]).map((b)=>b.slice(1).map((c)=> c))].flat()))
+  }
+  // setOptions()
 
 },[hotCoffeeData])
 
     console.log(coffeeType, 'choose coffee type')  
-    console.log(options.map((a)=> a[0]), 'allllllll')                   
+    console.log(options.map((a)=> [a[0], a[1]]),  'allllllll')    
+    console.log(
+      
+    )               
   return (
     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'black', }}>
         <div  style={{width: '330px', height: '680px',  backgroundSize:'100% 130%', 
@@ -49,21 +54,14 @@ useEffect(()=>{
                           <div style={{ }} className='overflow-Container'>
                             {options.map((a,ind)=>{
                               return(
-                                <>
-                                  {a[1].map((a, i)=>{
-                                    return (
-                                      <div key={i}>
-                                      <Link to={`/menu/menuOptions?${'typeOfCoffee='+a[0]}`} 
-                                      
+                                <div key={ind} >
+                                  <Link to={`/menu/menuOptions?${'Type='+a[0]}`}   
                                       style={{textDecoration: 'none', color:'black'}} 
                                       state={{ coffeeChoise: a[0], coffeeImage: a[1], }} >
-                                      <div>{a[0].slice(0,-6) + ' ' + a[0].slice(-6)}</div>
+                                      <div className='overflow-Container_text'>{a[0]}</div>
                                       <img src={a[1]} alt=''  />
                                   </Link>
-                                      </div>
-                                    )
-                                  })}
-                                </>
+                                </div>
                               )
                             })}
                             
