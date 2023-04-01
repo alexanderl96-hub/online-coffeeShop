@@ -31,25 +31,28 @@ import { hotCoffeeData } from '../CoffeeData.js'
     // let windowPath = window.location.href
     const {coffeeChoise} = location?.state
     const coffeeType =  search.get('Type=')
-    let coffeeName =  Object.entries(hotCoffeeData).map((a)=> 
-                                                    a.map((b)=> 
-                                                    Object.entries(b).map((c)=> c[0] === coffeeChoise ? 
-                                                    Object.entries(c[1]).map((elem)=> [elem[0], 
-                                                    Object.entries(elem[1]).map((item)=> item[1])].flat()).map((res)=> res) : ''
-                                                   )))
+    // let coffeeName =  Object.entries(hotCoffeeData).map((a)=> 
+    //                                                 a.map((b)=> 
+    //                                                 Object.entries(b).map((c)=> c[0] === coffeeChoise ? 
+    //                                                 Object.entries(c[1]).map((elem)=> [elem[0], 
+    //                                                 Object.entries(elem[1]).map((item)=> item[1])].flat()).map((res)=> res) : ''
+    //                                                )))
 
+              
+    useEffect(()=>{
+      let data = Object.entries(hotCoffeeData).map((a)=> 
+                                              a.map((b)=> 
+                                            Object.entries(b).find((c)=> c[0] === coffeeChoise ))).flat()[1]
 
+      let dataFilter = data.map((a)=> a)[1]
 
-    //  const coffeeDescription = hotCoffeeData[coffeeType][coffeeType].description
-    //  const coffeeImage = hotCoffeeData[coffeeType][coffeeType].image
-    //  const coffeeIngrdients = hotCoffeeData[coffeeType][coffeeType].ingredients
+      setOptions([dataFilter])
+
+    },[coffeeChoise])
+
     let nextValue = coffeeChoise.split(', ')    || ''
-    //  console.log(Object.entries(coffeeName).map((a)=> [a[0], a[1]['description']]),'uiyguk')
-    //  console.log(coffeeType, coffeeName.flat().map((a)=>a).map((b)=>b[0]).map((a)=> a), 'sdjghikjds' )
-
-   coffeeName = coffeeName.flat().map((a)=>a).map((b)=>b[0]).map((a)=> a)[1]
-
-   console.log(coffeeName)
+  
+   console.log(coffeeType, options, coffeeChoise)
 
     const blackCoffee = [[`Black coffee is simply a mixture of water and coffee without any cream. It 
                          should be served without any additional flavors like honey, cream, or milk. The 
@@ -151,14 +154,14 @@ function handelInputCard (e) {
                                          style={{}}>{readMore === false ? `${blackCoffee[0][0].slice(0,252)} ... ` : blackCoffee[0][0]}</div>
 
                                     <div style={{width: '260px',  textAlign:'justify',  }} className='overflow-Container-Options'>
-                                             {coffeeName.slice(1).map((a, ind)=>{return(
+                                             {options.map((a, ind)=>{return(
                                                    <div id={ind} key={ind} onClick={handelInputCard}
                                                          className= 'overflow-Container-Options_Cards'>
                                                      <div className={ open === 'true' && targetValue === ind ? 'checkCardOpen' :'checkCard'}
                                                             id={ind} onClick={((e)=> setTargetValue(ind))} 
                                                            >
-                                                        <b>{a[0]}</b> { open === 'true' && targetValue === ind  ? a[2] : `${a[2].slice(0,155)} ...` } 
-                                                        { open === 'true' && targetValue === ind && <Link to={`/menu/menuOptions/Select?${nextValue + '=' + a[0].split(' ').join('')}`}
+                                                        <b>{a[0]}</b> { open === 'true' && targetValue === ind  ? a[2] : `${a[2]} ...` } 
+                                                        {/* { open === 'true' && targetValue === ind && <Link to={`/menu/menuOptions/Select?${nextValue + '=' + a[0].split(' ').join('')}`}
                                                     style={{textDecoration :'none', color: 'black'}}
                                                            state={{ coffeeType: coffeeType, coffeeSelection: `${a[0]}`,
                                                             coffeeDescription: a[2].slice(0,80)}}
@@ -168,9 +171,9 @@ function handelInputCard (e) {
                                                             id={ind} onClick={((e)=> setTargetValue(ind))} 
                                                            > goNext
                                                        
-                                                        </div> </Link> }
+                                                        </div> </Link> } */}
                                                         </div> 
-                                                     {/* {a[0]}{a[1]['description']} */}
+                                                   
                                                         
                                                    </div>
                                              )})}
