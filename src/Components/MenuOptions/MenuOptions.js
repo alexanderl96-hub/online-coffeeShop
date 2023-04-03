@@ -42,11 +42,18 @@ import { hotCoffeeData } from '../CoffeeData.js'
     useEffect(()=>{
       let data = Object.entries(hotCoffeeData).map((a)=> 
                                               a.map((b)=> 
-                                            Object.entries(b).find((c)=> c[0] === coffeeChoise ))).flat()[1]
+                                            Object.entries(b).find((c)=> c[0] === coffeeChoise ))).flat()[1][1]
+                                                    
+   let arrBase =  []
+  
+   for(let key in data){
+      arrBase.push([key, data[key].image, data[key].description , data[key].ingredients])
+   }
+      // console.log(arrBase, 'get data full')
+      // let dataFilter = data.map((a)=> a)[1]
 
-      let dataFilter = data.map((a)=> a)[1]
 
-      setOptions([dataFilter])
+       setOptions(arrBase)
 
     },[coffeeChoise])
 
@@ -154,14 +161,14 @@ function handelInputCard (e) {
                                          style={{}}>{readMore === false ? `${blackCoffee[0][0].slice(0,252)} ... ` : blackCoffee[0][0]}</div>
 
                                     <div style={{width: '260px',  textAlign:'justify',  }} className='overflow-Container-Options'>
-                                             {options.map((a, ind)=>{return(
+                                             {options.slice(1).map((a, ind)=>{return(
                                                    <div id={ind} key={ind} onClick={handelInputCard}
                                                          className= 'overflow-Container-Options_Cards'>
                                                      <div className={ open === 'true' && targetValue === ind ? 'checkCardOpen' :'checkCard'}
                                                             id={ind} onClick={((e)=> setTargetValue(ind))} 
                                                            >
-                                                        <b>{a[0]}</b> { open === 'true' && targetValue === ind  ? a[2] : `${a[2]} ...` } 
-                                                        {/* { open === 'true' && targetValue === ind && <Link to={`/menu/menuOptions/Select?${nextValue + '=' + a[0].split(' ').join('')}`}
+                                                        <b>{a[0]}</b> { open === 'true' && targetValue === ind  ? a[2]: `${a[2].slice(0,100) } ...` } 
+                                                        { open === 'true' && targetValue === ind && <Link to={`/menu/menuOptions/Select?${nextValue + '=' + a[0].split(' ').join('')}`}
                                                     style={{textDecoration :'none', color: 'black'}}
                                                            state={{ coffeeType: coffeeType, coffeeSelection: `${a[0]}`,
                                                             coffeeDescription: a[2].slice(0,80)}}
@@ -171,7 +178,7 @@ function handelInputCard (e) {
                                                             id={ind} onClick={((e)=> setTargetValue(ind))} 
                                                            > goNext
                                                        
-                                                        </div> </Link> } */}
+                                                        </div> </Link> }
                                                         </div> 
                                                    
                                                         
